@@ -1,0 +1,70 @@
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+.box{
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+    margin-bottom: 1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+.box-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0,0,0,.125) !important;
+    padding: 1.5rem 1.25rem;
+    position: relative;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    margin-bottom: 0;
+}
+
+.box-title {
+    float: left;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: 0;
+}
+.box-footer {
+    padding: .75rem 1.25rem;
+    background-color: rgba(0,0,0,.03);
+    border-top: 0 solid rgba(0,0,0,.125);
+}
+.content-wrapper {
+    background-color: #f4f6f9;
+
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    font-size: 20px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #f39c12;
+    border-color: #f39c12;
+}
+a {
+    color: #f39c12;
+}
+.skin-yellow .sidebar-menu .treeview-menu>li.active>a, .skin-yellow .sidebar-menu .treeview-menu>li>a:hover {
+    color: #f39c12;
+}
