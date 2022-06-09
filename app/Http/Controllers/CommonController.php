@@ -6,13 +6,80 @@ use App\Model\AccountHeadSubType;
 use App\Model\AccountHeadType;
 use App\Model\BankAccount;
 use App\Model\Branch;
+use App\Model\Designation;
+use App\Model\Employee;
 use App\Model\PurchaseProduct;
+use App\Model\SalaryProcess;
 use App\Model\SalesOrder;
 use Illuminate\Http\Request;
 use DB;
 
 class CommonController extends Controller
 {
+    public function getDesignation(Request $request) {
+        $designations = Designation::where('department_id', $request->departmentId)
+            ->where('status', 1)
+            ->orderBy('name')->get()->toArray();
+
+        return response()->json($designations);
+    }
+
+    public function getEmployeeDetails(Request $request) {
+        $employee = Employee::where('id', $request->employeeId)
+            ->with('department', 'designation')->first();
+
+        return response()->json($employee);
+    }
+
+    public function getMonth(Request $request) {
+        $salaryProcess = SalaryProcess::select('month')
+            ->where('year', $request->year)
+            ->get();
+
+        $proceedMonths = [];
+        $result = [];
+
+        foreach ($salaryProcess as $item)
+            $proceedMonths[] = $item->month;
+
+        for($i=1; $i <=12; $i++) {
+            if (!in_array($i, $proceedMonths)) {
+                $result[] = [
+                    'id' => $i,
+                    'name' => date('F', mktime(0, 0, 0, $i, 10)),
+                ];
+            }
+        }
+
+        return response()->json($result);
+    }
+
+    public function getProcessedMonth(Request $request) {
+        $salaryProcess = SalaryProcess::select('month')
+            ->where('year', $request->year)
+            ->get();
+
+        $proceedMonths = [];
+        $result = [];
+
+        foreach ($salaryProcess as $item)
+            $proceedMonths[] = $item->month;
+
+        for($i=1; $i <=12; $i++) {
+            if (in_array($i, $proceedMonths)) {
+                $result[] = [
+                    'id' => $i,
+                    'name' => date('F', mktime(0, 0, 0, $i, 10)),
+                ];
+            }
+        }
+
+        return response()->json($result);
+    }
+    public function getBankAccountBalance(Request $request) {
+        $balance = BankAccount::where('id', $request->accountId)->first();
+        return response()->json($balance);
+    }
     public function getBranch(Request $request) {
         $branches = Branch::where('bank_id', $request->bankId)
             ->where('status', 1)

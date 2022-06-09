@@ -126,7 +126,9 @@
                 <li class="header">MAIN NAVIGATION</li>
 
                 <?php
-                $subMenu = ['warehouse', 'warehouse.add', 'warehouse.edit'];
+                $subMenu = ['warehouse', 'warehouse.add', 'warehouse.edit',
+                    'department', 'department.add', 'department.edit', 'designation',
+                    'designation.add', 'designation.edit'];
                 ?>
 
                 @can('administrator')
@@ -142,6 +144,17 @@
                         <li class="{{ Route::currentRouteName() == 'warehouse' ? 'active' : '' }}">
                             <a href="{{ route('warehouse') }}"><i class="fa fa-circle-o"></i> Warehouse</a>
                         </li>
+                        @endcan
+                        @can('department')
+                            <li class="{{ Route::currentRouteName() == 'department' ? 'active' : '' }}">
+                                <a href="{{ route('department') }}"><i class="fa fa-circle-o"></i> Department</a>
+                            </li>
+                        @endcan
+
+                        @can('designation')
+                            <li class="{{ Route::currentRouteName() == 'designation' ? 'active' : '' }}">
+                                <a href="{{ route('designation') }}"><i class="fa fa-circle-o"></i> Designation</a>
+                            </li>
                         @endcan
                     </ul>
                 </li>
@@ -181,7 +194,63 @@
                     </ul>
                 </li>
                 @endcan
+                <?php
+                $subMenu = ['employee.all', 'employee.add', 'employee.edit', 'employee.details',
+                    'payroll.leave.index'];
+                ?>
 
+                @can('hr')
+                    <li class="treeview {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}">
+                        <a href="#">
+                            <i class="fa fa-circle-o text-yellow"></i> <span>HR</span>
+                            <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu {{ in_array(Route::currentRouteName(), $subMenu) ? 'active menu-open' : '' }}">
+                            @can('employee')
+                                <li class="{{ Route::currentRouteName() == 'employee.all' ? 'active' : '' }}">
+                                    <a href="{{ route('employee.all') }}"><i class="fa fa-circle-o"></i> Employee</a>
+                                </li>
+                            @endcan
+
+                            @can('leave')
+                                <li class="{{ Route::currentRouteName() == 'payroll.leave.index' ? 'active' : '' }}">
+                                    <a href="{{ route('payroll.leave.index') }}"><i class="fa fa-circle-o"></i> Leave</a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+                <?php
+                $subMenu = ['payroll.salary_update.index', 'payroll.salary_process.index',
+                    'payroll.leave.index'];
+                ?>
+
+                @can('payroll')
+                    <li class="treeview {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}">
+                        <a href="#">
+                            <i class="fa fa-circle-o text-yellow"></i> <span>Payroll</span>
+                            <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu {{ in_array(Route::currentRouteName(), $subMenu) ? 'active menu-open' : '' }}">
+                            @can('salary_update')
+                                <li class="{{ Route::currentRouteName() == 'payroll.salary_update.index' ? 'active' : '' }}">
+                                    <a href="{{ route('payroll.salary_update.index') }}"><i class="fa fa-circle-o"></i> Salary Update</a>
+                                </li>
+                            @endcan
+
+                            @can('salary_process')
+                                <li class="{{ Route::currentRouteName() == 'payroll.salary_process.index' ? 'active' : '' }}">
+                                    <a href="{{ route('payroll.salary_process.index') }}"><i class="fa fa-circle-o"></i> Salary Process</a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <?php
                 $subMenu = ['supplier', 'supplier.add', 'supplier.edit', 'purchase_product', 'purchase_product.add',
                     'purchase_product.edit', 'purchase_order.create', 'purchase_receipt.all',

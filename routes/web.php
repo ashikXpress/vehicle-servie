@@ -49,6 +49,46 @@ Route::middleware(['auth'])->group(function () {
     Route::post('bank-account/edit/{account}', 'BankAccountController@editPost')->middleware('permission:account');
     Route::get('bank-account/get-branches', 'BankAccountController@getBranches')->name('bank_account.get_branch')->middleware('permission:account');
 
+    // Department
+    Route::get('department', 'DepartmentController@index')->name('department')->middleware('permission:department');
+    Route::get('department/add', 'DepartmentController@add')->name('department.add')->middleware('permission:department');
+    Route::post('department/add', 'DepartmentController@addPost')->middleware('permission:department');
+    Route::get('department/edit/{department}', 'DepartmentController@edit')->name('department.edit')->middleware('permission:department');
+    Route::post('department/edit/{department}', 'DepartmentController@editPost')->middleware('permission:department');
+
+    // Designation
+    Route::get('designation', 'DesignationController@index')->name('designation')->middleware('permission:designation');
+    Route::get('designation/add', 'DesignationController@add')->name('designation.add')->middleware('permission:designation');
+    Route::post('designation/add', 'DesignationController@addPost')->middleware('permission:designation');
+    Route::get('designation/edit/{designation}', 'DesignationController@edit')->name('designation.edit')->middleware('permission:designation');
+    Route::post('designation/edit/{designation}', 'DesignationController@editPost')->middleware('permission:designation');
+
+    // HR
+    Route::get('employee', 'HRController@employeeIndex')->name('employee.all')->middleware('permission:employee');
+    Route::get('employee/datatable', 'HRController@employeeDatatable')->name('employee.datatable');
+    Route::get('employee/add', 'HRController@employeeAdd')->name('employee.add')->middleware('permission:employee');
+    Route::post('employee/add', 'HRController@employeeAddPost')->middleware('permission:employee');
+    Route::get('employee/edit/{employee}', 'HRController@employeeEdit')->name('employee.edit')->middleware('permission:employee');
+    Route::post('employee/edit/{employee}', 'HRController@employeeEditPost')->middleware('permission:employee');
+    Route::get('employee/details/{employee}', 'HRController@employeeDetails')->name('employee.details')->middleware('permission:employee');
+    Route::post('employee/designation/update', 'HRController@employeeDesignationUpdate')->name('employee.designation_update');
+    Route::post('payroll/get-leave', 'HRController@getLeave')->name('employee.get_leaves');
+
+    // Payroll - Salary Update
+    Route::get('payroll/salary-update', 'PayrollController@salaryUpdateIndex')->name('payroll.salary_update.index')->middleware('permission:salary_update');
+    Route::post('payroll/salary-update/update', 'PayrollController@salaryUpdatePost')->name('payroll.salary_update.post');
+    Route::get('payroll/salary-update/datatable', 'PayrollController@salaryUpdateDatatable')->name('payroll.salary_update.datatable');
+
+    // Payroll - Salary Process
+    Route::get('payroll/salary-process', 'PayrollController@salaryProcessIndex')->name('payroll.salary_process.index')->middleware('permission:salary_process');
+    Route::post('payroll/salary-process', 'PayrollController@salaryProcessPost')->middleware('permission:salary_process');
+
+    // Payroll - Leave
+    Route::get('payroll/leave', 'PayrollController@leaveIndex')->name('payroll.leave.index')->middleware('permission:leave');
+    Route::post('payroll/leave', 'PayrollController@leavePost')->middleware('permission:leave');
+
+
+
     // Supplier
     Route::get('supplier', 'SupplierController@index')->name('supplier')->middleware('permission:supplier');
     Route::get('supplier/add', 'SupplierController@add')->name('supplier.add')->middleware('permission:supplier');
@@ -179,16 +219,20 @@ Route::middleware(['auth'])->group(function () {
     // Common
     Route::get('get-branch', 'CommonController@getBranch')->name('get_branch');
     Route::get('get-bank-account', 'CommonController@getBankAccount')->name('get_bank_account');
+    Route::get('get-bank-account-balance', 'CommonController@getBankAccountBalance')->name('get_bank_account_balance');
     Route::get('order-details', 'CommonController@orderDetails')->name('get_order_details');
     Route::get('get-account-head-type', 'CommonController@getAccountHeadType')->name('get_account_head_type');
     Route::get('get-account-head-sub-type', 'CommonController@getAccountHeadSubType')->name('get_account_head_sub_type');
     Route::get('get-serial-suggestion', 'CommonController@getSerialSuggestion')->name('get_serial_suggestion');
+    Route::get('get-designation', 'CommonController@getDesignation')->name('get_designation');
+    Route::get('get-employee-details', 'CommonController@getEmployeeDetails')->name('get_employee_details');
+    Route::get('get-month', 'CommonController@getMonth')->name('get_month');
+    Route::get('get-processed-month', 'CommonController@getProcessedMonth')->name('get_processed_month');
+
     //Route::get('vat-correction', 'CommonController@vatCorrection');
 });
 
-
-
-
+//php artisan cache:forget spatie.permission.cache
 
 
 require __DIR__.'/auth.php';

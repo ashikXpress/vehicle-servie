@@ -23,18 +23,20 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                    <table id="table" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Refund</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="table" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Paid</th>
+                                <th>Due</th>
+                                <th>Refund</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

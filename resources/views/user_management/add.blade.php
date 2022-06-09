@@ -78,13 +78,23 @@
                             </tr>
 
                             <tr>
-                                <td style="vertical-align: middle;">
+                                <td rowspan="3" style="vertical-align: middle;">
                                     <input type="checkbox" name="permission[]" value="administrator" id="administrator"> Administrator
                                 </td>
 
                                 <td>
                                     <input type="checkbox" name="permission[]" value="warehouse" id="warehouse"> Warehouse
                                 </td>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="department" id="department"> Department
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="designation" id="designation"> Designation
+                                </td>
+                            </tr>
                             </tr>
 
                             <tr>
@@ -107,6 +117,39 @@
                                 <td>
                                     <input type="checkbox" name="permission[]" value="account" id="account"> Account
                                 </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" style="vertical-align: middle;">
+                                    <input type="checkbox" name="permission[]" value="hr" id="hr"> HR
+
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="employee" id="employee"> Employee
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="leave" id="leave"> Leave
+                                </td>
+                            </tr>
+                            </td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="3" style="vertical-align: middle;">
+                                    <input type="checkbox" name="permission[]" value="payroll" id="payroll"> Payroll
+
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="salary_update" id="salary_update"> Salary Update
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permission[]" value="salary_process" id="salary_process"> Salary Process
+                                </td>
+                            </tr>
+                            </td>
                             </tr>
 
                             <tr>
@@ -289,8 +332,12 @@
             $('#administrator').click(function () {
                 if ($(this).prop('checked')) {
                     $('#warehouse').attr("disabled", false);
+                    $('#department').attr("disabled", false);
+                    $('#designation').attr("disabled", false);
                 } else {
                     $('#warehouse').attr("disabled", true);
+                    $('#department').attr("disabled", true);
+                    $('#designation').attr("disabled", true);
                 }
             });
 
@@ -306,7 +353,26 @@
                     $('#account').attr("disabled", true);
                 }
             });
-
+// HR
+            $('#hr').click(function () {
+                if ($(this).prop('checked')) {
+                    $('#employee').attr("disabled", false);
+                    $('#leave').attr("disabled", false);
+                } else {
+                    $('#employee').attr("disabled", true);
+                    $('#leave').attr("disabled", true);
+                }
+            });
+            // Payroll
+            $('#payroll').click(function () {
+                if ($(this).prop('checked')) {
+                    $('#salary_update').attr("disabled", false);
+                    $('#salary_process').attr("disabled", false);
+                } else {
+                    $('#salary_update').attr("disabled", true);
+                    $('#salary_process').attr("disabled", true);
+                }
+            });
             // Purchase
             $('#purchase').click(function () {
                 if ($(this).prop('checked')) {
@@ -393,8 +459,17 @@
         function init() {
             if (!$('#administrator').prop('checked')) {
                 $('#warehouse').attr("disabled", true);
+                $('#department').attr("disabled", true);
+                $('#designation').attr("disabled", true);
             }
-
+            if (!$('#hr').prop('checked')) {
+                $('#employee').attr("disabled", true);
+                $('#leave').attr("disabled", true);
+            }
+            if (!$('#payroll').prop('checked')) {
+                $('#salary_update').attr("disabled", true);
+                $('#salary_process').attr("disabled", true);
+            }
             if (!$('#bank_and_account').prop('checked')) {
                 $('#bank').attr("disabled", true);
                 $('#branch').attr("disabled", true);
